@@ -1,0 +1,26 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Temporary & editor files
+*.tmp
+*.swp
+*.swo
+*~
+*.bak
+*.log
+
+# Environment & local credentials
+.env
+.env.*
+!.env.example
+
+# Build / runtime artifacts
+graphify-out/
+__pycache__/
+*.pyc
+
+# Archives
+*.zip
+*.tar.gz
+*.tgz
