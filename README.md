@@ -1,52 +1,58 @@
 # Agent Prompt Architect
 
-`agent-prompt-architect` — специализированный скилл для AI-ассистентов и агентных платформ, предназначенный для проектирования и улучшения готовых промптов для **coding-**, **design-** и **repository-агентов**.
+[English](README.md) | [Русский](README_RU.md) | [中文](README_ZH.md)
 
-Скилл преобразует высокоуровневый запрос пользователя в один самодостаточный, готовый к выполнению промпт с четко зафиксированными целями, границами (Scope), техническими инвариантами, критериями готовности (Definition of Done) и воспроизводимой проверкой.
+---
 
-## Ключевые возможности
+`agent-prompt-architect` is a specialized skill for AI assistants and agentic coding environments, designed to architect and refine production-ready prompts for **coding**, **design**, and **repository** agents.
 
-- **Repository grounding through Graphify**: для любой работы с существующей кодовой базой в создаваемый промпт обязательно закладывается предварительное исследование архитектуры через [Graphify](https://github.com/safishamsi/graphify). Агент обязан исследовать граф зависимостей, точки входа и blast radius до составления плана и правок кода (с прозрачным fallback на поиск по коду при отсутствии графа).
-- **Осознанная маршрутизация скиллов**: скилл анализирует задачу и подбирает минимальный достаточный набор специализированных инструментов (дизайн, верстка, анимации, браузерное тестирование, оптимизация), исключая случайное раздувание контекста.
-- **Инварианты выполнения**: создаваемый промпт ориентирует целевого агента на автономное завершение задачи, точечные экономные изменения, параллелизацию независимых операций и валидацию реальными тестами/поведением в рантайме.
+It transforms high-level user requests into a single, self-contained, copy-pasteable prompt with strictly defined goals, explicit task boundaries (Scope In / Scope Out), technical invariants, Definition of Done (DoD), and reproducible verification procedures.
 
-## Структура репозитория
+## Key Capabilities
+
+- **Repository Grounding through Graphify**: For any task modifying an existing codebase, the prompt mandates an initial architectural discovery phase using [Graphify](https://github.com/safishamsi/graphify). The agent must inspect dependency graphs, god nodes, entry points, and blast radius before planning or touching code (with an explicit fallback to source inspection if Graphify is unavailable).
+- **Mindful Skill Routing**: Intelligently selects the minimal sufficient combination of specialized skills (e.g., UI/UX styling, motion/GSAP, browser automation, refactoring audit) from installed tools, avoiding indiscriminate context bloat.
+- **Execution Invariants & DoD**: Enforces autonomous task completion, minimal localized patches over full file rewrites, parallelization of independent reads/actions, and validation via concrete tests and observable runtime behavior.
+
+## Repository Structure
 
 ```text
 agent-prompt-architect/
-├── SKILL.md                          # Основные инструкции скилла и правила генерации
+├── SKILL.md                          # Main skill specification and generation workflow
 ├── references/
-│   ├── prompt-blueprint.md           # Полный шаблон структуры промпта, инварианты и DoD
-│   └── skill-routing.md              # Карта применимости и правила выбора установленных скиллов
-├── .gitignore                        # Исключения временных и локальных файлов
-└── README.md                         # Документация репозитория
+│   ├── prompt-blueprint.md           # Comprehensive prompt blueprint, invariants, and DoD
+│   └── skill-routing.md              # Routing matrix and selection criteria for installed skills
+├── .gitignore                        # Git ignore rules for temporary and local artifacts
+├── README.md                         # Repository documentation (English)
+├── README_RU.md                      # Репозиторий и документация (Русский)
+└── README_ZH.md                      # 仓库文档 (中文)
 ```
 
-## Установка скилла
+## Installation
 
-Для использования скилла в окружении Antigravity / Gemini CLI разместите каталог скилла в директории пользовательских навыков:
+To use this skill in Antigravity or Gemini CLI, place the repository into your skills directory:
 
-### Вариант 1. Клонирование из GitHub
+### Option 1: Clone from GitHub
 
 ```bash
 git clone https://github.com/AkumaHacai/agent-prompt-architect.git /home/code/.gemini/config/skills/agent-prompt-architect
 ```
 
-### Вариант 2. Символическая ссылка (если репозиторий уже склонирован локально)
+### Option 2: Symlink (if already cloned locally)
 
 ```bash
 ln -s /path/to/agent-prompt-architect /home/code/.gemini/config/skills/agent-prompt-architect
 ```
 
-После размещения скилл становится доступен агенту по имени `agent-prompt-architect`.
+Once linked, the skill becomes immediately available to the agent under the name `agent-prompt-architect`.
 
-## Пример использования
+## Example Usage
 
-Запрос пользователя к ассистенту для активации скилла:
+User prompt to trigger the skill:
 
 ```text
-Используй скилл agent-prompt-architect.
-Составь готовый промпт для coding-агента: нужно добавить переключатель светлой и темной темы в существующий Next.js проект на Tailwind CSS, сохранив состояние в localStorage, предотвратив мигание темы при загрузке (FOUC) и проверив результат в браузере через Playwright.
+Use the agent-prompt-architect skill.
+Draft a complete, executable prompt for a coding agent: implement a dark/light theme toggle in an existing Next.js + Tailwind CSS repository, persist preference in localStorage, eliminate flash-of-unauthenticated-theme (FOUC), and verify the UI behavior in a real browser using Playwright.
 ```
 
-В ответ скилл сгенерирует цельный, готовый к копированию блок с ролью, этапом исследования репозитория через Graphify, маршрутизацией скиллов (`impeccable`, `ui-styling`, `playwright-cli`), строгими границами (Scope In / Scope Out) и критериями приемки.
+The skill will output a structured, ready-to-run prompt block detailing the agent role, repository grounding steps, skill invocations (`impeccable`, `ui-styling`, `playwright-cli`), explicit scope, and clear acceptance criteria.
