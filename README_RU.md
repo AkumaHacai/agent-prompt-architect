@@ -23,6 +23,7 @@
 
 ```text
 agent-prompt-architect/
+├── START_HERE.md                     # Точка входа, когда архив загружают в чат-ассистент
 ├── SKILL.md                          # Триггер, основной workflow, инварианты, ссылки на references
 ├── references/
 │   ├── prompt-blueprint.md           # Шаблон промпта, режимы выполнения, инварианты, контроль качества
@@ -32,7 +33,8 @@ agent-prompt-architect/
 ├── platforms/
 │   ├── antigravity.md                # Antigravity (agy): skills, plugins, subagents, режимы
 │   ├── claude.md                     # Claude Code: skills, plugins, subagents, plan mode
-│   └── codex.md                      # Codex CLI: skills, agents, sandbox, plan mode
+│   ├── codex.md                      # Codex CLI: skills, agents, sandbox, plan mode
+│   └── chat.md                       # Обычный чат без инструментов: роли, сбор фактов, формат ответа
 ├── LICENSE                           # Лицензия MIT
 ├── .gitignore                        # Исключения временных и локальных файлов
 ├── README.md                         # Документация репозитория (English)
@@ -91,6 +93,12 @@ ln -s /path/to/agent-prompt-architect ~/.gemini/config/skills/agent-prompt-archi
 ```
 
 После размещения скилл автоматически определяется по имени `agent-prompt-architect`.
+
+## Использование в чате (ChatGPT, Gemini, Claude, DeepSeek)
+
+Установка не нужна. Скачайте репозиторий архивом (**Code → Download ZIP**), приложите его к новому чату и отправьте стартовый блок из [START_HERE.md](START_HERE.md) вместе со своей задачей.
+
+Ассистент прочитает `START_HERE.md`, `SKILL.md` и `platforms/chat.md` и применит тот же рабочий процесс, что и внутри coding-агента, с одним отличием: он не видит ваш репозиторий, поэтому опирается на приложенные файлы либо встраивает в готовый промпт фазу repository grounding вместо выдуманных путей. Чтобы получить промпт с реальными путями, приложите список файлов (`git ls-files`) и исходники, которых касается изменение.
 
 ## Пример использования
 

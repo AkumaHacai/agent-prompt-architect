@@ -23,6 +23,7 @@ It transforms high-level user requests into a single, self-contained, copy-paste
 
 ```text
 agent-prompt-architect/
+├── START_HERE.md                     # Entry point when the archive is dropped into a chat assistant
 ├── SKILL.md                          # Trigger, core workflow, invariants, links to references
 ├── references/
 │   ├── prompt-blueprint.md           # Prompt template, execution modes, invariants, QA checklist
@@ -32,7 +33,8 @@ agent-prompt-architect/
 ├── platforms/
 │   ├── antigravity.md                # Antigravity (agy): skills, plugins, subagents, modes
 │   ├── claude.md                     # Claude Code: skills, plugins, subagents, plan mode
-│   └── codex.md                      # Codex CLI: skills, agents, sandbox, plan mode
+│   ├── codex.md                      # Codex CLI: skills, agents, sandbox, plan mode
+│   └── chat.md                       # Plain chat (no tools): role split, fact gathering, answer format
 ├── LICENSE                           # MIT License
 ├── .gitignore                        # Git ignore rules for temporary and local artifacts
 ├── README.md                         # Repository documentation (English)
@@ -91,6 +93,12 @@ ln -s /path/to/agent-prompt-architect ~/.gemini/config/skills/agent-prompt-archi
 ```
 
 Once linked or installed, the skill is automatically detected by name `agent-prompt-architect`.
+
+## Use in a chat (ChatGPT, Gemini, Claude, DeepSeek)
+
+No installation required. Download the repository as a ZIP (**Code → Download ZIP**), attach it to a new chat, and send the bootstrap block from [START_HERE.md](START_HERE.md) with your task.
+
+The assistant reads `START_HERE.md`, `SKILL.md`, and `platforms/chat.md`, then applies the same workflow it would inside a coding agent, with one difference: it cannot inspect your repository, so it either uses the files you attach or writes a repository grounding procedure into the generated prompt instead of naming files it has not seen. Attach a directory listing (`git ls-files`) and the sources the change touches to get a prompt with real paths.
 
 ## Example Usage
 

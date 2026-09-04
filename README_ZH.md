@@ -23,6 +23,7 @@
 
 ```text
 agent-prompt-architect/
+├── START_HERE.md                     # 将压缩包投递给聊天助手时的入口文件
 ├── SKILL.md                          # 触发条件、核心流程、不变量、参考链接
 ├── references/
 │   ├── prompt-blueprint.md           # 提示词模板、执行模式、不变量、质量检查
@@ -32,7 +33,8 @@ agent-prompt-architect/
 ├── platforms/
 │   ├── antigravity.md                # Antigravity (agy)：技能、插件、子代理、模式
 │   ├── claude.md                     # Claude Code：技能、插件、子代理、计划模式
-│   └── codex.md                      # Codex CLI：技能、代理、沙箱、计划模式
+│   ├── codex.md                      # Codex CLI：技能、代理、沙箱、计划模式
+│   └── chat.md                       # 无工具的普通聊天：角色划分、事实收集、回答格式
 ├── LICENSE                           # MIT 许可证
 ├── .gitignore                        # 临时文件与本地产物的忽略规则
 ├── README.md                         # 仓库文档 (English)
@@ -91,6 +93,12 @@ ln -s /path/to/agent-prompt-architect ~/.gemini/config/skills/agent-prompt-archi
 ```
 
 安装完成后，智能体即可通过名称 `agent-prompt-architect` 自动识别并激活。
+
+## 在聊天中使用（ChatGPT、Gemini、Claude、DeepSeek）
+
+无需安装。将仓库下载为 ZIP（**Code → Download ZIP**），附加到新的聊天中，并发送 [START_HERE.md](START_HERE.md) 里的启动语块以及你的任务。
+
+助手会读取 `START_HERE.md`、`SKILL.md` 和 `platforms/chat.md`，随后套用与在编码智能体中相同的工作流程，唯一区别是：它无法查看你的仓库，因此只依据你附加的文件，或在生成的提示词中写入 repository grounding 阶段，而不会臆造路径。若想得到含真实路径的提示词，请附上文件列表（`git ls-files`）以及本次改动涉及的源码。
 
 ## 示例用法
 
