@@ -24,3 +24,6 @@ __pycache__/
 *.zip
 *.tar.gz
 *.tgz
+
+# Local agent settings
+.claude/
